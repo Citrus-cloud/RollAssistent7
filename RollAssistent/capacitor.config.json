@@ -1,0 +1,6 @@
+{
+  "appId": "com.dnd.helper",
+  "appName": "DnD Helper",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}

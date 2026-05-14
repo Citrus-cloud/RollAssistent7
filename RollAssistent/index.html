@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Roll Assistant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Главное меню -->
+    <div id="menu" class="screen active">
+        <div class="menu-container">
+              <div class="lang-switcher">
+  <button id="btn-lang-ru" class="lang-btn active-lang">RU</button>
+  <button id="btn-lang-en" class="lang-btn">EN</button>
+</div>
+            <h1 id="main-title">Roll Assistant</h1>
+<p class="subtitle" id="main-subtitle">Создай своего героя</p>
+            <button class="menu-btn" id="btn-create">✨ Создать персонажа</button>
+            <button class="menu-btn" id="btn-quick-start" style="border-color: #e67e22; color: #f39c12;">⚡ Быстрый старт</button>
+
+            
+<button class="menu-btn" id="btn-characters">👥 Мои персонажи</button>
+    <div id="main-character-card" class="main-character-card" style="display:none;"></div>
+</div>
+    </div>
+
+
+
+    <!-- Экран создания персонажа -->
+    <div id="character-creation" class="screen">
+        <button class="back-btn" id="btn-back-creation">← Назад</button>
+        <h1>🧙 Создание персонажа</h1>
+
+<!-- Wizard Progress -->
+<div id="wizard-progress-container"></div>
+
+<div style="text-align:center; margin-bottom:10px;">
+    <button class="menu-btn" id="btn-save-character" style="display:none; width:auto; padding:8px 20px;">💾 Сохранить персонажа</button>
+</div>
+
+<!-- Step 1: Name & Race -->
+<div id="wizard-step-1">
+<section class="card">
+    <h2>Имя персонажа</h2>
+    <input type="text" id="creation-char-name" placeholder="Введите имя" style="width:100%; padding:8px; background:#1e1e1e; border:1px solid #3a3a3a; color:#f0e6d2; border-radius:6px;">
+</section>
+
+<section class="card">
+    <h2>Раса</h2>
+    <div class="custom-select-wrapper">
+        <div class="custom-select" id="race-custom-select">
+            <div class="custom-select-trigger">-- Выберите расу --</div>
+            <div class="custom-options" style="display:none;"></div>
+        </div>
+        <select id="race-select" style="display:none;">
+            <option value="">-- Выберите расу --</option>
+        </select>
+    </div>
+    <div id="race-info" class="info-box"></div>
+    <button class="menu-btn" id="btn-race-details" style="margin-top:5px;">🔍 Подробности расы</button>
+    <button class="menu-btn" id="btn-create-custom-race" style="margin-top:5px; border-color:#4fc3f7; color:#4fc3f7;">➕ Создать свою расу</button>
+</section>
+</div>
+
+<!-- Step 2: Class & Level -->
+<div id="wizard-step-2" style="display:none;">
+<section class="card">
+    <h2>Класс</h2>
+    <div class="custom-select-wrapper">
+        <div class="custom-select" id="class-custom-select">
+            <div class="custom-select-trigger">-- Выберите класс --</div>
+            <div class="custom-options" style="display:none;"></div>
+        </div>
+        <select id="class-select" style="display:none;">
+            <option value="">-- Выберите класс --</option>
+        </select>
+    </div>
+    <div id="class-info" class="info-box"></div>
+    <div id="class-details-info" class="info-box" style="display:none;"></div>
+    <button class="menu-btn" id="btn-class-details" style="margin-top:5px;">🔍 Подробности класса</button>
+    <button class="menu-btn" id="btn-create-custom-class" style="margin-top:5px; border-color:#4fc3f7; color:#4fc3f7;">➕ Создать свой класс</button>
+</section>
+
+<section class="card" id="subclass-section" style="display: none;">
+    <h2>Архетип (Подкласс)</h2>
+    <div class="custom-select-wrapper">
+        <div class="custom-select" id="subclass-custom-select">
+            <div class="custom-select-trigger">-- Выберите архетип --</div>
+            <div class="custom-options" style="display:none;"></div>
+        </div>
+        <select id="subclass-select" style="display:none;">
+            <option value="">-- Выберите архетип --</option>
+        </select>
+    </div>
+    <div id="subclass-info" class="info-box"></div>
+</section>
+
+<section class="card">
+    <h2>Уровень персонажа</h2>
+    <div class="custom-select-wrapper">
+        <div class="custom-select" id="level-custom-select">
+            <div class="custom-select-trigger">1 уровень</div>
+            <div class="custom-options" style="display:none;"></div>
+        </div>
+        <select id="level-select" style="display:none;">
+            <option value="1">1 уровень</option>
+            <option value="2">2 уровень</option>
+            <option value="3">3 уровень</option>
+            <option value="4">4 уровень</option>
+            <option value="5">5 уровень</option>
+            <option value="6">6 уровень</option>
+            <option value="7">7 уровень</option>
+            <option value="8">8 уровень</option>
+            <option value="9">9 уровень</option>
+            <option value="10">10 уровень</option>
+            <option value="11">11 уровень</option>
+            <option value="12">12 уровень</option>
+            <option value="13">13 уровень</option>
+            <option value="14">14 уровень</option>
+            <option value="15">15 уровень</option>
+            <option value="16">16 уровень</option>
+            <option value="17">17 уровень</option>
+            <option value="18">18 уровень</option>
+            <option value="19">19 уровень</option>
+            <option value="20">20 уровень</option>
+        </select>
+    </div>
+    <p id="level-bonus" class="info-box">Бонус мастерства для 1 уровня: +2</p>
+</section>
+</div>
+
+<!-- Step 3: Ability Scores -->
+<div id="wizard-step-3" style="display:none;">
+<section class="card">
+    <h2>
+        Характеристики
+        <button class="info-btn" id="btn-stats-info" title="Как работает распределение">?⃝</button>
+    </h2>
+    <p id="points-display" class="info-box">Очки: 27 (базовые), +0 от уровней</p>
+    <div id="race-bonus-display" class="info-box" style="margin-bottom:10px; display:none;"></div>
+    <div id="attributes" class="stats-grid"></div>
+    <div style="display: flex; gap: 8px; margin-top: 10px;">
+        <button class="menu-btn" id="btn-random-stats" style="flex:1;">🎲 Случайно</button>
+        <button class="menu-btn" id="btn-reset-stats" style="flex:1;">🔄 Сбросить к 8</button>
+    </div>
+</section>
+</div>
+
+<!-- Step 4: Spells/Abilities -->
+<div id="wizard-step-4" style="display:none;">
+<section class="card">
+    <h2>📜 Способности</h2>
+    <p id="selected-spells-summary">Не выбрано</p>
+    <button class="menu-btn" id="btn-open-spells">Выбрать способности</button>
+</section>
+</div>
+
+<!-- Step 5: Equipment -->
+<div id="wizard-step-5" style="display:none;">
+<section class="card">
+    <h2>⚔️ Снаряжение и артефакты</h2>
+    <div class="equipment-shop">
+        <div class="equipment-filters">
+            <input type="text" id="equipment-search" placeholder="🔍 Найти предмет...">
+            <select id="equipment-type-filter">
+                <option value="all">Все типы</option>
+                <option value="weapon">⚔️ Оружие</option>
+                <option value="armor">🛡️ Доспех</option>
+                <option value="artifact">💍 Артефакт</option>
+            </select>
+            <select id="equipment-rarity-filter">
+                <option value="all">Все редкости</option>
+                <option value="обычный">Обычный</option>
+                <option value="необычный">Необычный</option>
+                <option value="редкий">Редкий</option>
+                <option value="очень редкий">Очень редкий</option>
+                <option value="легендарный">Легендарный</option>
+                <option value="масштабирующийся">Масштабирующийся</option>
+            </select>
+        </div>
+        <div id="equipment-counts" class="equipment-counts"></div>
+        <div class="custom-select-wrapper">
+            <div class="custom-select" id="equipment-custom-select">
+                <div class="custom-select-trigger">-- Выберите предмет --</div>
+                <div class="custom-options" style="display:none;"></div>
+            </div>
+            <select id="equipment-select" style="display:none;">
+                <option value="">-- Выберите предмет --</option>
+            </select>
+        </div>
+    </div>
+    <div id="inventory-container" style="margin-top:15px;"></div>
+</section>
+</div>
+
+<!-- Wizard Navigation -->
+<div id="wizard-nav-container"></div>
+
+    </div>
+
+<!-- Модальное окно помощи по характеристикам -->
+<div id="stats-info-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Как работают характеристики</h2>
+            <button class="close-btn" id="btn-close-stats-info">✕</button>
+        </div>
+        <div class="class-details-container">
+            <div class="feature-card">
+                <div class="feature-title">🎯 Point Buy (27 очков)</div>
+                <div class="feature-text">Все характеристики начинаются с 8. Вы можете повышать их, тратя очки:
+                <br>• 9 → 1 очко, 10 → 2, 11 → 3, 12 → 4, 13 → 5
+                <br>• 14 → 7 очков, 15 → 9 очков
+                <br>Всего доступно 27 очков.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-title">⬆️ Повышение от уровня (ASI)</div>
+                <div class="feature-text">На уровнях 4, 8, 12, 16 и 19 вы получаете +2 дополнительных очка. Ими можно поднять характеристику выше 15 (до максимума 20).</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-title">🧬 Расовые бонусы</div>
+                <div class="feature-text">Каждая раса даёт бонусы к определённым характеристикам. Они прибавляются сверху и не тратят ваши очки.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-title">🎲 Случайное распределение</div>
+                <div class="feature-text">Кнопка Случайно автоматически распределяет все 27 очков + очки ASI случайным образом, создавая сбалансированный набор характеристик.</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-title">📊 Модификатор</div>
+                <div class="feature-text">Модификатор = (Итоговая характеристика − 10) ÷ 2 (округление вниз). Он используется для бросков атаки, спасбросков и проверок навыков.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Экран карточки персонажа -->
+    <div id="character-sheet" class="screen">
+        <button class="back-btn" id="btn-back-sheet">← Назад</button>
+        <h1>📋 Карточка персонажа</h1>
+        <div id="sheet-content"></div>
+    </div> <!-- конец character-sheet -->
+    </div>
+
+    <!-- Модальное окно выбора заклинаний -->
+    <div id="spells-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Выберите способности</h2>
+                <button class="close-btn" id="btn-close-spells">✕</button>
+            </div>
+<div class="custom-select-wrapper">
+                <div class="custom-select" id="spell-level-custom-select">
+                    <div class="custom-select-trigger">Все уровни</div>
+                    <div class="custom-options" style="display:none;"></div>
+                </div>
+                <select id="spell-level-filter" style="display:none;">
+                    <option value="all">Все уровни</option>
+                <option value="0">Заговоры (0)</option>
+                <option value="1">1 уровень</option>
+                <option value="2">2 уровень</option>
+                <option value="3">3 уровень</option>
+                <option value="4">4 уровень</option>
+                <option value="5">5 уровень</option>
+                <option value="6">6 уровень</option>
+                <option value="7">7 уровень</option>
+                <option value="8">8 уровень</option>
+                <option value="9">9 уровень</option>
+</select>
+            </div>
+            <div class="spell-filters-row">
+    <div class="custom-select-wrapper" style="flex:1;">
+        <div class="custom-select" id="spell-school-custom-select">
+            <div class="custom-select-trigger">Все школы</div>
+            <div class="custom-options" style="display:none;"></div>
+        </div>
+        <select id="spell-school-filter" style="display:none;">
+            <option value="all">Все школы</option>
+            <option value="Воплощение">Воплощение</option>
+            <option value="Некромантия">Некромантия</option>
+            <option value="Иллюзия">Иллюзия</option>
+            <option value="Очарование">Очарование</option>
+            <option value="Ограждение">Ограждение</option>
+            <option value="Преобразование">Преобразование</option>
+            <option value="Прорицание">Прорицание</option>
+            <option value="Вызов">Вызов</option>
+            <option value="Особая">Особая</option>
+        </select>
+    </div>
+</div>
+            <input type="text" id="spell-search" placeholder="🔍 Поиск способностей...">
+            <div class="spell-type-filters" id="spell-type-filters">
+              <button class="spell-type-btn active" data-type="all">Все типы</button>
+              <button class="spell-type-btn" data-type="attack">⚔️ Атакующие</button>
+              <button class="spell-type-btn" data-type="defense">🛡️ Защитные</button>
+              <button class="spell-type-btn" data-type="healing">💚 Лечащие</button>
+              <button class="spell-type-btn" data-type="buff">✨ Баффы</button>
+              <button class="spell-type-btn" data-type="summon">👻 Призывающие</button>
+              <button class="spell-type-btn" data-type="utility">🔧 Универсальные</button>
+            </div>
+            <div class="custom-ability-creator">
+    <input type="text" id="new-ability-name" placeholder="Название способности">
+    <input type="number" id="new-ability-level" placeholder="Уровень" min="0" max="9">
+    <textarea id="new-ability-desc" placeholder="Описание" rows="2"></textarea>
+    <button id="btn-add-ability" class="menu-btn">➕ Создать способность</button>
+</div>
+            <div id="spells-list"></div>
+        </div>
+    </div>
+
+<!-- Модальное окно создания кастомного предмета/заметки -->
+<div id="custom-item-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>📦 Создать запись</h2>
+            <button class="close-btn" id="btn-close-custom-item">✕</button>
+        </div>
+        <div class="custom-item-form">
+            <input type="text" id="custom-item-name" placeholder="Название">
+            <select id="custom-item-type">
+                <option value="note">📝 Заметка</option>
+                <option value="weapon">⚔️ Оружие</option>
+                <option value="armor">🛡️ Доспех</option>
+                <option value="artifact">💍 Артефакт</option>
+            </select>
+            <select id="custom-item-rarity">
+                <option value="обычный">Обычный</option>
+                <option value="необычный">Необычный</option>
+                <option value="редкий">Редкий</option>
+                <option value="очень редкий">Очень редкий</option>
+                <option value="легендарный">Легендарный</option>
+            </select>
+            <select id="custom-item-slot">
+                <option value="none">Без слота</option>
+                <option value="mainhand">Основная рука</option>
+                <option value="offhand">Вторая рука</option>
+                <option value="body">Тело</option>
+                <option value="head">Голова</option>
+                <option value="neck">Шея</option>
+                <option value="back">Спина</option>
+                <option value="hands">Руки</option>
+                <option value="waist">Пояс</option>
+                <option value="feet">Ноги</option>
+                <option value="ring">Кольцо</option>
+            </select>
+            <textarea id="custom-item-desc" placeholder="Описание (необязательно)" rows="3"></textarea>
+            <button class="menu-btn" id="btn-create-custom-item">➕ Создать</button>
+        </div>
+    </div>
+</div>
+
+    <!-- Модальное окно подробностей класса -->
+    <div id="class-details-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Особенности класса</h2>
+                <button class="close-btn" id="btn-close-class-details">✕</button>
+            </div>
+            <div id="class-details-full"></div>
+        </div>
+        
+    </div>
+<!-- Модальное окно подробностей расы -->
+<div id="race-details-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Особенности расы</h2>
+            <button class="close-btn" id="btn-close-race-details">✕</button>
+        </div>
+        <div id="race-details-full"></div>
+    </div>
+</div>
+<!-- Экран моих персонажей -->
+<!-- Экран моих персонажей -->
+<div id="characters-list-screen" class="screen">
+    <button class="back-btn" id="btn-back-characters">← Назад</button>
+    <h1>👥 Мои персонажи</h1>
+    <div id="saved-characters-container"></div>
+</div>
+<!-- Модальное окно уведомлений -->
+<div id="alert-modal" class="modal">
+    <div class="modal-content alert-modal-content">
+        <div class="modal-header">
+            <h2 id="alert-title">Уведомление</h2>
+            <button class="close-btn" id="btn-close-alert">✕</button>
+        </div>
+        <p id="alert-message" style="text-align:center; padding:20px; font-size:1.1em; color:#f0e6d2;"></p>
+<div style="text-align:center; padding-bottom:20px; display:flex; gap:10px; justify-content:center;">
+    <button class="menu-btn" id="btn-alert-cancel" style="display:none; width:auto; padding:8px 25px; background:#4a2a2a; border-color:#8b4513;">Отмена</button>
+    <button class="menu-btn" id="btn-alert-ok" style="display:inline-block; width:auto; padding:8px 25px;">OK</button>
+</div>
+    </div>
+</div>
+<!-- Модальное окно заметок -->
+<div id="notes-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>📝 Заметки</h2>
+            <button class="close-btn" id="btn-close-notes">✕</button>
+        </div>
+        <button class="menu-btn" id="btn-add-note" style="margin-bottom:10px;">➕ Новая заметка</button>
+        <div id="notes-list"></div>
+    </div>
+</div>
+<!-- Внутри <body>, после всех существующих экранов, но перед закрытием </body> -->
+
+<!-- Компактное меню инструментов (выпадающее) -->
+<div class="tools-menu" id="tools-menu">
+  <button class="tools-menu-trigger" id="tools-trigger">⚙️</button>
+  <div class="tools-menu-items" id="tools-items">
+    <button id="menu-dice-btn" title="Кубики">🎲</button>
+    <button id="menu-notes-btn" title="Заметки">📝</button>
+    <button id="menu-chat-btn" title="Чат с ИИ-Мастером">💬</button>
+  </div>
+</div>
+
+<!-- Модальное окно кубиков -->
+<div id="dice-modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>🎲 Броски кубиков</h2>
+      <button class="close-btn" id="btn-close-dice">✕</button>
+    </div>
+    <div class="dice-options">
+      <div class="dice-type-row">
+        <label>Тип кубика:</label>
+        <select id="dice-type">
+          <option value="4">d4</option>
+          <option value="6" selected>d6</option>
+          <option value="8">d8</option>
+          <option value="10">d10</option>
+          <option value="12">d12</option>
+          <option value="20">d20</option>
+          <option value="100">d100</option>
+        </select>
+      </div>
+      <div class="dice-count-row">
+        <label>Количество бросков:</label>
+        <input type="number" id="dice-count" value="1" min="1" max="20">
+      </div>
+      <div class="dice-advantage-row">
+        <label>Тип броска:</label>
+        <button class="advantage-btn active" data-adv="normal">Нормальный</button>
+        <button class="advantage-btn" data-adv="advantage">С преимуществом</button>
+        <button class="advantage-btn" data-adv="disadvantage">С помехой</button>
+      </div>
+      <button id="btn-roll-dice" class="menu-btn">🎲 Бросить!</button>
+    </div>
+    <div id="dice-results" class="dice-results-area"></div>
+  </div>
+</div>
+
+<!-- Модальное окно чата -->
+<div id="chat-modal" class="modal">
+  <div class="modal-content chat-modal-content">
+    <div class="modal-header">
+      <h2>📖 ИИ‑Мастер</h2>
+      <button class="close-btn" id="btn-close-chat">✕</button>
+    </div>
+    <div id="chat-messages" class="chat-messages"></div>
+    <div class="chat-input-area">
+      <textarea id="chat-input" rows="2" placeholder="Спросите Мастера о правилах, вашем персонаже, монстрах..."></textarea>
+      <button id="btn-send-chat" class="menu-btn">➤</button>
+    </div>
+    <div class="chat-status" id="chat-status"></div>
+  </div>
+</div>
+<!-- Модальное окно создания кастомной расы -->
+<div id="custom-race-modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>🧬 Создать расу</h2>
+      <button class="close-btn" id="btn-close-custom-race">✕</button>
+    </div>
+    <div class="custom-item-form">
+      <input type="text" id="custom-race-name" placeholder="Название расы">
+      <textarea id="custom-race-desc" placeholder="Описание расы" rows="3"></textarea>
+      <div class="race-bonuses-grid">
+        <label>Бонусы характеристик:</label>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:4px;">
+          <div><label style="font-size:0.7em;color:#b0a08a;">Сил</label><input type="number" id="custom-race-bonus-str" min="-2" max="3" value="0"></div>
+          <div><label style="font-size:0.7em;color:#b0a08a;">Лов</label><input type="number" id="custom-race-bonus-dex" min="-2" max="3" value="0"></div>
+          <div><label style="font-size:0.7em;color:#b0a08a;">Тел</label><input type="number" id="custom-race-bonus-con" min="-2" max="3" value="0"></div>
+          <div><label style="font-size:0.7em;color:#b0a08a;">Инт</label><input type="number" id="custom-race-bonus-int" min="-2" max="3" value="0"></div>
+          <div><label style="font-size:0.7em;color:#b0a08a;">Мдр</label><input type="number" id="custom-race-bonus-wis" min="-2" max="3" value="0"></div>
+          <div><label style="font-size:0.7em;color:#b0a08a;">Хар</label><input type="number" id="custom-race-bonus-cha" min="-2" max="3" value="0"></div>
+        </div>
+      </div>
+      <input type="text" id="custom-race-languages" placeholder="Языки (через запятую)" value="Общий">
+      <label style="font-size:0.85em;color:#b0a08a;">Особенности:</label>
+      <div id="custom-race-features-list"></div>
+      <button class="menu-btn" id="btn-add-race-feature" style="padding:5px 10px; font-size:0.85em;">➕ Добавить особенность</button>
+      <button class="menu-btn" id="btn-save-custom-race" style="margin-top:8px;">💾 Сохранить расу</button>
+    </div>
+  </div>
+</div>
+
+<!-- Модальное окно создания кастомного класса -->
+<div id="custom-class-modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>⚔️ Создать класс</h2>
+      <button class="close-btn" id="btn-close-custom-class">✕</button>
+    </div>
+    <div class="custom-item-form">
+      <input type="text" id="custom-class-name" placeholder="Название класса">
+      <textarea id="custom-class-desc" placeholder="Описание класса" rows="3"></textarea>
+      <div style="display:flex; gap:6px;">
+        <div style="flex:1;">
+          <label style="font-size:0.7em;color:#b0a08a;">Кость хитов</label>
+          <select id="custom-class-hitdie">
+            <option value="d6">d6</option>
+            <option value="d8" selected>d8</option>
+            <option value="d10">d10</option>
+            <option value="d12">d12</option>
+          </select>
+        </div>
+        <div style="flex:1;">
+          <label style="font-size:0.7em;color:#b0a08a;">Подкласс на ур.</label>
+          <select id="custom-class-sublevel">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3" selected>3</option>
+          </select>
+        </div>
+      </div>
+      <input type="text" id="custom-class-primary" placeholder="Основная характеристика (напр. Сила и Ловкость)">
+      <label style="font-size:0.85em;color:#b0a08a;">Особенности по уровням:</label>
+      <div id="custom-class-features-list"></div>
+      <button class="menu-btn" id="btn-add-class-feature" style="padding:5px 10px; font-size:0.85em;">➕ Добавить особенность</button>
+      <label style="font-size:0.85em;color:#b0a08a; margin-top:8px; display:block;">Подклассы:</label>
+      <div id="custom-class-subclasses-list"></div>
+      <button class="menu-btn" id="btn-add-class-subclass" style="padding:5px 10px; font-size:0.85em;">➕ Добавить подкласс</button>
+      <button class="menu-btn" id="btn-save-custom-class" style="margin-top:8px;">💾 Сохранить класс</button>
+    </div>
+  </div>
+</div>
+
+    <!-- Data scripts (non-module, define globals) -->
+<script src="data.js"></script>
+<script src="races-details.js"></script>
+<script src="classes-details.js"></script>
+<script src="equipment-data.js"></script>
+<!-- i18n: translations for game data -->
+<script src="i18n-data.js"></script>
+<script src="i18n-race-details.js"></script>
+<!-- Bridge: expose data to ES modules -->
+<script src="src/data-bridge.js"></script>
+<!-- Main app module -->
+<script type="module" src="src/app.js"></script>
+</body>
+</html>
