@@ -13,3 +13,4 @@ export const STAT_NAMES = {
 };
 
 export const STORAGE_KEY = 'dnd_characters';
+export const NPC_STORAGE_KEY = 'dnd_npcs';

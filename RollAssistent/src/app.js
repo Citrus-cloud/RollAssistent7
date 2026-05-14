@@ -15,6 +15,7 @@ import { openChest } from './components/loot.js';
 import { initChat, sendMessageToAI, getChatHistory } from './components/chat.js';
 import { setupCustomRaceCreator, setupCustomClassCreator, getCustomRaces, getCustomClasses, getCustomRaceDetails, getCustomClassDetails } from './components/customCreator.js';
 import { initWizard, setupWizardEvents, renderWizardProgress, renderWizardNav, resetWizard } from './components/creationWizard.js';
+import { initNpcScreen } from './components/npcList.js';
 
 // Data will be loaded from global scope (data.js, equipment.js loaded before this module)
 let races, classes, spells, equipmentList, raceDetails, classDetails;
@@ -243,6 +244,18 @@ function setupNavigation() {
     document.getElementById('characters-list-screen').classList.remove('active');
     menuScreen.classList.add('active');
     updateMainCharacterCard();
+  });
+
+  // NPC screen
+  document.getElementById('btn-npcs').addEventListener('click', () => {
+    menuScreen.classList.remove('active');
+    const npcScreen = document.getElementById('npc-screen');
+    npcScreen.classList.add('active');
+    const npcContent = document.getElementById('npc-screen-content');
+    initNpcScreen(npcContent, () => {
+      npcScreen.classList.remove('active');
+      menuScreen.classList.add('active');
+    });
   });
 
   document.getElementById('btn-save-character').addEventListener('click', saveCharacterAsMain);
