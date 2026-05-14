@@ -1127,3 +1127,266 @@ select option {
   color: #1a1a1a;
   font-weight: bold;
 }
+
+
+
+/* ========== NPC / ENEMIES STYLES ========== */
+
+/* NPC List Grid */
+.npc-list-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.npc-list-card {
+  background: #1a1a1a;
+  border: 1px solid #3a2020;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  position: relative;
+}
+
+.npc-list-card:hover {
+  border-color: #e74c3c;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 12px rgba(231, 76, 60, 0.2);
+}
+
+.npc-list-card:active {
+  transform: scale(0.98);
+}
+
+.npc-list-card-name {
+  font-weight: bold;
+  font-size: 1.05em;
+  color: #f0e6d2;
+  margin-bottom: 3px;
+}
+
+.npc-list-card-info {
+  font-size: 0.85em;
+  color: #b0a08a;
+}
+
+.npc-list-card-weapon {
+  font-size: 0.8em;
+  color: #c0a06a;
+  margin-top: 3px;
+}
+
+.npc-list-card-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.npc-list-delete-btn {
+  background: none;
+  border: none;
+  font-size: 1.1em;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  padding: 4px;
+}
+
+.npc-list-delete-btn:hover {
+  opacity: 1;
+}
+
+/* NPC Stats Grid */
+.npc-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.npc-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 6px;
+  padding: 8px 4px;
+}
+
+.npc-stat-item label {
+  font-size: 0.7em;
+  color: #d4af37;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.npc-stat-input {
+  width: 50px !important;
+  text-align: center;
+  padding: 4px !important;
+  font-size: 1em !important;
+  background: #0d0d0d;
+  border: 1px solid #3a3a3a;
+  color: #f0e6d2;
+  border-radius: 4px;
+}
+
+.npc-stat-input:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 4px rgba(212, 175, 55, 0.3);
+}
+
+.npc-stat-mod {
+  font-size: 0.8em;
+  color: #4fc3f7;
+  margin-top: 3px;
+  font-weight: bold;
+}
+
+/* NPC Equipment Grid (Creation) */
+.npc-equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.npc-equip-slot {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.npc-equip-slot input[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #151515;
+}
+
+/* NPC Equipment Display (Card view, read-only) */
+.npc-equipment-display {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.npc-equip-display-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  background: #151515;
+  border: 1px solid #2a2a2a;
+  border-radius: 4px;
+}
+
+.npc-equip-slot-name {
+  font-size: 0.75em;
+  color: #d4af37;
+  min-width: 80px;
+  font-weight: bold;
+}
+
+.npc-equip-item-name {
+  font-size: 0.85em;
+  color: #f0e6d2;
+}
+
+/* NPC Card Header */
+.npc-card-header {
+  border-color: #e74c3c;
+}
+
+.npc-card-name {
+  color: #e74c3c;
+  font-size: 1.3em;
+  margin-bottom: 6px;
+}
+
+.npc-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.npc-badge {
+  display: inline-block;
+  background: #2a1a1a;
+  border: 1px solid #4a2a2a;
+  border-radius: 12px;
+  padding: 2px 10px;
+  font-size: 0.75em;
+  color: #e0b070;
+}
+
+.npc-card-detail {
+  font-size: 0.85em;
+  color: #b0a08a;
+  margin: 3px 0;
+}
+
+.npc-card-detail strong {
+  color: #d4af37;
+}
+
+/* NPC Card Actions */
+.npc-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.npc-card-actions .menu-btn {
+  width: 100%;
+}
+
+/* NPC Back Button */
+.npc-back-btn {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+/* NPC Combo Select styling */
+.npc-combo-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: #1a1a1a;
+  border: 1px solid #4a3a1a;
+  color: #f0e6d2;
+  border-radius: 6px;
+  padding: 8px 32px 8px 10px;
+  font-size: 0.9em;
+  cursor: pointer;
+  width: 100%;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23d4af37' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.npc-combo-select:hover {
+  border-color: #d4af37;
+}
+
+.npc-combo-select:focus {
+  outline: none;
+  border-color: #d4af37;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+.npc-combo-custom {
+  margin-top: 6px;
+}
+
+/* Responsive adjustments for NPC */
+@media (max-width: 400px) {
+  .npc-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .npc-equipment-grid {
+    grid-template-columns: 1fr;
+  }
+}
